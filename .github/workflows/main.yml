@@ -1,24 +1,59 @@
-name : Simple workflow
-on : [push]
-jobs :
-  jobs1 :
-    runs-on : ubuntu-latest
-    steps:
-    - uses : actions/checkout@v2
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: "3.8"
-    - name: Say Hello
-      run: echo "Hello"
+ name : Simple workflow
+ on : [push]
+# jobs :
+#   # jobs1 :
+#   #   runs-on : ubuntu-latest
+#   #   steps:
+#   #   - uses : actions/checkout@v2
+#   #   - name: Set up Python
+#   #     uses: actions/setup-python@v2
+#   #     with:
+#   #       python-version: "3.8"
+#   #   - name: Say Hello
+#   #     run: echo "Hello" 
 
-  jobs2 :
-    runs-on : ubuntu-latest
+#   jobs2 :
+#     runs-on : ubuntu-latest
+#     steps:
+#     - uses : actions/checkout@v2
+#     - name: Set up Python
+#       uses: actions/setup-python@v2
+#       with:
+#         python-version: "3.8"
+#     - name: Say Hello
+#       run: echo "EXECUTION JOB 2" 
+
+
+#       name: Breast Cancer Model Workflow
+
+# on: [push]
+
+jobs3:
+  build:
+    runs-on: ubuntu-latest
     steps:
-    - uses : actions/checkout@v2
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: "3.8"
-    - name: Say Hello
-      run: echo "EXECUTION JOB 2" 
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+      - name: Install dependencies
+        run: |
+          pip install pandas scikit-learn
+      - name: Run bcancer.py
+        run: python bcancer.py
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+      - name: Install dependencies
+        run: |
+          pip install pandas scikit-learn
+      - name: Run test.py
+        run: python test.py
