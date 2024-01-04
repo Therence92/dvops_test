@@ -1,0 +1,13 @@
+name : Simple workflow
+on : [push]
+jobs :
+  jobs1 :
+    runs-on : ubuntu-latest
+    steps:
+    - uses : actions/setup-checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: "3.8"
+    - name: Say Hello
+      run: echo "Hello"
