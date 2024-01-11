@@ -1,14 +1,15 @@
-name : Manual workflow
+name : Greeting Global
 on : 
-  workflow_dispatch: 
-
+    workflow_dispatch :
+     
 jobs :
   jobs1 :
     runs-on : ubuntu-latest
+      env :
+        GREETING : "Hello !"
     steps:
-    - uses : actions/checkout@v2
-    - name: Set up Python
-      uses: actions/setup-python@v2
+    - name: Afficher Greeting dans le job 1
+      run: echo "hello"
       with:
         python-version: "3.8"
     - name: Say Hello
